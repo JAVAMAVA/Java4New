@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="lib/CLI.jar"/>
+	<classpathentry kind="lib" path="lib/MyAlgorithms.jar"/>
+	<classpathentry kind="lib" path="lib/MyMaze.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.swt.win32.win32.x86_64_3.103.0.v20140605-2012.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
