@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 
 
 
-public abstract class MyBoard extends Composite implements Board{
+public class MyBoard extends AbstractBoard{
 
 	
 	
