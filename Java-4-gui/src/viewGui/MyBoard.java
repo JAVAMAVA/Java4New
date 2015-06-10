@@ -1,6 +1,7 @@
 package viewGui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -8,12 +9,12 @@ import org.eclipse.swt.widgets.Shell;
 
 
 public class MyBoard extends AbstractBoard{
-
 	
-	
+	public Canvas boardGame[][];
 	
 	public MyBoard(Composite parent, int style,Display display,Shell shell) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
+		
 		
 		
 		

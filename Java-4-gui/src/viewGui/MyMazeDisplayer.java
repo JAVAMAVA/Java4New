@@ -7,16 +7,18 @@ import org.eclipse.swt.widgets.Shell;
 
 import algorithms.mazeGenerators.Maze;
 
-public class MyMazeDisplayer extends MyBoard implements MazeDispleyer  {
+public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	
-Canvas boardGame[][];
+	MyBoard Board;
+	Maze m;
 	
-	public MyMazeDisplayer(Composite parent, int style, Display display,Shell shell,int rows,int cols) {
-		super(parent, style, display, shell);
-		Maze matrix = generateMaze(rows,cols ); //getting the maze
+	
+	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell,Maze matrix ) {
+		super();
+		this.Board = board;
+		this.m = matrix;
 		
-		
-		display(matrix, parent); //start displaying maze
+		display(matrix, this.Board); //start displaying maze
 		
 		
 		
@@ -35,13 +37,13 @@ Canvas boardGame[][];
 			for (int j=0;j<matrix.getCols();j++)
 			{
 				if (matrix.getCell(i, j).getDown())
-					boardGame[i][j] = new MazeCellCanvas(parent, style, "Down", shell, display);
+					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Down", shell, display);
 				if (matrix.getCell(i, j).getUp())
-					boardGame[i][j] = new MazeCellCanvas(parent, style, "Up", shell, display);
+					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Up", shell, display);
 				if (matrix.getCell(i, j).getRight())
-					boardGame[i][j] = new MazeCellCanvas(parent, style, "Right", shell, display);
+					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Right", shell, display);
 				if (matrix.getCell(i, j).getRight())
-					boardGame[i][j] = new MazeCellCanvas(parent, style, "Left", shell, display);
+					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Left", shell, display);
 			}
 		}
 
