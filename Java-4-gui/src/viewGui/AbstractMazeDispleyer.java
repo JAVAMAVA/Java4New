@@ -7,16 +7,16 @@ import org.eclipse.swt.widgets.Shell;
 
 import algorithms.mazeGenerators.Maze;
 /**
- * {@link MyMazeDispleyer} implements {@link MazeDispleyer} 
+ * {@link AbstractMazeDispleyer} implements {@link MazeDispleyer} 
  * this class got the display method that prints out a maze
  * @author user
  *
  */
-public class MyMazeDispleyer extends MyBoard implements MazeDispleyer {
+public abstract class AbstractMazeDispleyer extends MyBoard implements MazeDispleyer {
 
 	Canvas boardGame[][];
 	
-	public MyMazeDispleyer(Composite parent, int style, Display display,Shell shell,int rows,int cols) {
+	public AbstractMazeDispleyer(Composite parent, int style, Display display,Shell shell,int rows,int cols) {
 		super(parent, style, display, shell);
 		Maze matrix = generateMaze(rows,cols ); //getting the maze
 		

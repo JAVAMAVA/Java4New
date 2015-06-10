@@ -14,7 +14,7 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import presenter.Presenter.Command;
 import viewGui.MazeDispleyer;
-import viewGui.MyMazeDispleyer;
+import viewGui.AbstractMazeDispleyer;
 /**
  * {@link MyView} extends {@link Observable} implements {@link View} is the view in the MVP pattern
  * @author Michael&Amit
@@ -76,11 +76,11 @@ public class MyView extends Observable implements View {
 		return this.lastcommand;
 	}
 	/**
-	 * displayMaze builds and instance of {@link MyMazeDispleyer} and displays the maze to the console
+	 * displayMaze builds and instance of {@link AbstractMazeDispleyer} and displays the maze to the console
 	 */
 	@Override
 	public void displayMaze(Maze m) {
-		MazeDispleyer MD=new MyMazeDispleyer();
+		MazeDispleyer MD=new AbstractMazeDispleyer();
 		MD.display(m);
 		
 	}
