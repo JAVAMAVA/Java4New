@@ -31,21 +31,24 @@ public class MyBoard extends AbstractBoard{
 		});
 		
 		
-	}
 	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+	}
+
+
 	@Override
 	public void drawBoard() {
 		
+		redraw();
 		
-		
-	}
-	
-	
-	
-		
-		
-		
-		super.addPaintListener(listener);
 	}
 	
 	

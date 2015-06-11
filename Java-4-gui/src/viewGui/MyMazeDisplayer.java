@@ -1,5 +1,7 @@
 package viewGui;
 
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -10,20 +12,21 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	
 	MyBoard Board;
 	Maze m;
-	
+	Display dis;
+	Shell sh;
+	int style;
 	
 	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell) {
 		super();
 		this.Board = board;
 		this.m = getMyMaze(10, 10);
-		
-		display(this.m, this.Board); //start displaying maze
-		
-		
-		
-		
+		this.dis = display;
+		this.sh =shell;
+		this.style = style;
+			
 		
 	}
+	
 	
 	
 
@@ -51,17 +54,29 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	}
 	
 	
-	/**
-	 * display method displays a maze in the console
-	 */
 	@Override
-	public void display(Maze matrix,Composite parent) {
+	public void display(PaintEvent maze) {
+		
+		GridLayout mLayout = new GridLayout(0, false); //needs changing
+		
+		drawMaze(this.m, Board, style, dis, sh, this.m.getRows(), this.m.getRows());
 		
 		
 		
-		
-		
-		
+	}
+	
+	
+//	/**
+//	 * display method displays a maze in the console
+//	 */
+//	@Override
+//	public void display23(Maze matrix,Composite parent) {
+//		
+//		
+//		
+//		
+//		
+//		
 //		for (int j = 0; j < matrix.getCols(); j++)
 //			System.out.print(" _");
 //			System.out.println("");
@@ -83,9 +98,9 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 //			}
 //			System.out.println();
 //		}
-		
-	}
-	
+//		
+//	}
+//	
 	public Maze getMyMaze(int rows,int cols){ //get maze from view
 		Maze maze;
 		
@@ -97,5 +112,10 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 		
 		
 	}
+
+
+
+
+	
 
 }

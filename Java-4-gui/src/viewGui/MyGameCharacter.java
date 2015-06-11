@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.Image;
 
 public abstract class MyGameCharacter implements GameCharacter {
 
-	
+	int x,y;
 	
 	public void paint(PaintEvent e,int w,int h){
 		   e.gc.drawImage(new Image(, data), w, h);

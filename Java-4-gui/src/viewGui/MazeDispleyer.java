@@ -1,5 +1,6 @@
 package viewGui;
 
+import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.widgets.Composite;
 
 import algorithms.mazeGenerators.Maze;
@@ -11,6 +12,6 @@ import algorithms.mazeGenerators.Maze;
  */
 
 public interface MazeDispleyer {
-	public void display(Maze matrix,Composite parent);
+	public void display(PaintEvent maze);
 
 }
