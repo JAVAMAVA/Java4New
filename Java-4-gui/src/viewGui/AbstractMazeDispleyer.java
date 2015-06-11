@@ -7,7 +7,7 @@ package viewGui;
  */
 public abstract class AbstractMazeDispleyer implements MazeDispleyer{
 	
-	
+	//add canvas[][]
 	
 	
 

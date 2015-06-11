@@ -13,5 +13,5 @@ import algorithms.mazeGenerators.Maze;
 
 public interface MazeDispleyer {
 	public void display(PaintEvent maze);
-
+	public void displaySol(PaintEvent maze);
 }

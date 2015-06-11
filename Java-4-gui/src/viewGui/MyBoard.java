@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public class MyBoard extends AbstractBoard{
 	
-	MyMazeDisplayer myMaze;
+	AbstractMazeDispleyer myMaze;
 	
 	
 	public MyBoard(Composite parent, int style,Display display,Shell shell) {
@@ -24,14 +24,16 @@ public class MyBoard extends AbstractBoard{
 			
 			@Override
 			public void paintControl(PaintEvent arg0) { //moving the character
-				
-				
+				myMaze.display(arg0); //send to him arg0
+				//set char
+				//mymaze.redraw
+				// ....
 				
 			}
 		});
 		
 		
-	
+	 
 	
 	
 	

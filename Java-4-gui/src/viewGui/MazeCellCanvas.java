@@ -31,9 +31,9 @@ public class MazeCellCanvas extends Canvas {
 		//this = new Canvas(shell, SWT.NONE);
 		
 		Image UpWall = new Image(display,"WallUp.jpg");
-		Image DownWall = new Image(display,"WallUp.jpg");;;
+		Image DownWall = new Image(display,"WallUp.jpg");
 		Image LeftWall = new Image(display,"WallLeft.jpg");
-		Image RightWall = new Image(display,"WallUp.jpg");;;
+		Image RightWall = new Image(display,"WallUp.jpg");
 		
 		addPaintListener(new PaintListener() {
 			  public void paintControl(PaintEvent e) {

@@ -51,6 +51,12 @@ public class MazeWindow extends BasicWindow implements View{
 				
 				 if (arg0.keyCode == SWT.ARROW_UP){
 					 //move up
+					 //list todo:
+					 //moving the index of the character
+					 //canvas[][].redraw ->redraws to old thing(if problem, do redraw whole maze)
+					 //gamechar.paint
+					 
+					 
 				 }
 				 if (arg0.keyCode == SWT.ARROW_DOWN){
 					 //move down

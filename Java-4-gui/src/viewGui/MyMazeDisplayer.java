@@ -116,6 +116,15 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 
 
 
+	@Override
+	public void displaySol(PaintEvent maze) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 	
 
 }
