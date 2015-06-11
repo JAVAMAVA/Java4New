@@ -26,8 +26,8 @@ public class MazeCellCanvas extends Canvas {
 	Image RightWall;
 		
 	
-	public MazeCellCanvas(Composite parent, int style,String side,Shell shell,Display display) {
-		super(parent, style);
+	public MazeCellCanvas(MyBoard Board, int style,String side,Shell shell,Display display) {
+		super(Board, style);
 		//this = new Canvas(shell, SWT.NONE);
 		
 		Image UpWall = new Image(display,"WallUp.jpg");

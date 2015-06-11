@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -27,9 +28,42 @@ public class MazeWindow extends BasicWindow implements View{
 	MyBoard gameBoard;
 	public Command lastcommand;
 	private HashMap<String, Command> comm;
+	
+	
+	
 	@Override
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
+		
+		
+		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
+			
+
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				
+				 if (arg0.keyCode == SWT.ARROW_UP){
+					 //move up
+				 }
+				 if (arg0.keyCode == SWT.ARROW_DOWN){
+					 //move down
+				 }
+				 if (arg0.keyCode == SWT.ARROW_LEFT){
+					 //move left
+				 }
+				 if (arg0.keyCode == SWT.ARROW_RIGHT){
+					 //move right
+				 }
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				
+			}
+		});
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
 		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
@@ -97,6 +131,8 @@ public class MazeWindow extends BasicWindow implements View{
 		});
 		clue.setText("Get a Clue");
 		clue.setLayoutData(new GridData(SWT.FILL, SWT.NONE,false,false,1,1));
+		
+		
 		clue.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -137,6 +173,8 @@ public class MazeWindow extends BasicWindow implements View{
 				
 			}
 		});
+		
+		
 		
 		
 		

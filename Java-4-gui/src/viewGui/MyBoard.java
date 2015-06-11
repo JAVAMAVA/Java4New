@@ -1,6 +1,7 @@
 package viewGui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -10,12 +11,13 @@ import org.eclipse.swt.widgets.Shell;
 
 public class MyBoard extends AbstractBoard{
 	
-	public Canvas boardGame[][];
+	MyMazeDisplayer myMaze;
+	
 	
 	public MyBoard(Composite parent, int style,Display display,Shell shell) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
 		
-		
+	myMaze = new MyMazeDisplayer(this, style, display, shell);
 		
 		
 	}
@@ -26,6 +28,8 @@ public class MyBoard extends AbstractBoard{
 		
 		
 	}
+	
+	
 	
 	
 	

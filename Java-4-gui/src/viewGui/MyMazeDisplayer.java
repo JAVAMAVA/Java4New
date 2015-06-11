@@ -1,6 +1,5 @@
 package viewGui;
 
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -13,24 +12,26 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	Maze m;
 	
 	
-	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell,Maze matrix ) {
+	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell) {
 		super();
 		this.Board = board;
-		this.m = matrix;
+		this.m = getMyMaze(10, 10);
 		
-		display(matrix, this.Board); //start displaying maze
+		display(this.m, this.Board); //start displaying maze
 		
 		
 		
 		
 		
 	}
+	
+	
 
 	/**
 	 * The method drawMaze draws the maze it gets into the board. It draws each cell as a way and around it the wall, if the wall is vertical it draws the WallVertical and if the wall is horizontal it draws a WallHorizontal
 	 * @param matrix - the {@link Maze} that need to draw in the board
 	 */
-	public void drawMaze(Maze matrix,Composite parent,int style, Display display,Shell shell,int rows,int cols)
+	public void drawMaze(Maze matrix,MyBoard Board,int style, Display display,Shell shell,int rows,int cols)
 	{
 		for(int i=0;i<matrix.getRows();i++)
 		{
@@ -56,7 +57,7 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	@Override
 	public void display(Maze matrix,Composite parent) {
 		
-		drawMaze(matrix, parent);
+		
 		
 		
 		
@@ -85,11 +86,13 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 		
 	}
 	
-	public Maze generateMaze(int rows,int cols){ //get maze from view
+	public Maze getMyMaze(int rows,int cols){ //get maze from view
+		Maze maze;
+		
+		maze = new Maze(rows,cols);
 		
 		
-		
-		return null;
+		return maze;
 		
 		
 		
