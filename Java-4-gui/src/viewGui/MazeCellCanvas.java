@@ -40,6 +40,7 @@ public class MazeCellCanvas extends Canvas {
 			        
 			    if(side == "Right"){
 			    	e.gc.drawImage(RightWall, 0, 0);
+			    	//e.gc.drawImage(image, 0, 0, srcWidth, srcHeight, destX, destY, destWidth, destHeight);
 				}
 				else
 					if(side =="Left"){

@@ -29,6 +29,12 @@ public class MazeWindow extends BasicWindow implements View{
 	public Command lastcommand;
 	private HashMap<String, Command> comm;
 	
+	public MazeWindow(String title,int width , int height) {
+		super(title, width, height);
+	
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	
 	@Override
@@ -181,37 +187,9 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 	
-	 public void keyReleased(KeyEvent e){ //up down left and right movement, not sure if the method should be placed here
-		 if (e.keyCode == SWT.ARROW_UP){
-			 //move up
-		 }
-		 if (e.keyCode == SWT.ARROW_DOWN){
-			 //move down
-		 }
-		 if (e.keyCode == SWT.ARROW_LEFT){
-			 //move left
-		 }
-		 if (e.keyCode == SWT.ARROW_RIGHT){
-			 //move right
-		 }
-		 
-		/*public void MouseMove(MouseEvent e)
-		 {
-			 if(e.)
-		 }*/
-			 
-			 
-			 
-			 
-	 }
 	
 
-	public MazeWindow(String title, int width, int height) {
-		super(title, width, height);
-		// TODO Auto-generated constructor stub
-	}
 
-	
 
 	@Override
 	public Command getUserCommand() {
