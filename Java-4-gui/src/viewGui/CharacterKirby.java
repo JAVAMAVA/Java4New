@@ -10,11 +10,7 @@ public class CharacterKirby implements GameCharacter{
 		this.x=x;this.y=y;
 	   }
 	   
-	   public void paint(PaintEvent e,int w,int h){
-		   e.gc.drawImage(new Image(, data), w, h);
-		   e.gc.setForeground(new Color(null,255,0,0));
-		   e.gc.drawOval(x,y, w, h);
-	   }
+	   
 
 	@Override
 	public void showCharacter() {
