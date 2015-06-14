@@ -41,7 +41,7 @@ public class MazeWindow extends BasicWindow implements View{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		
+		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
 		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
 			
 
@@ -78,7 +78,7 @@ public class MazeWindow extends BasicWindow implements View{
 		});
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
-		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		
 		Button startGame=new Button(shell, SWT.PUSH);
 		Button exitGame=new Button(shell, SWT.PUSH);
 		Button clue=new Button(shell, SWT.PUSH);

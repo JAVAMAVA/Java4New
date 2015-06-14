@@ -2,6 +2,7 @@ package boot;
 
 import presenter.Presenter;
 import viewGui.MazeWindow;
+import viewGui.StartWindow;
 import model.MyModel;
 
 public class Run {
@@ -15,9 +16,13 @@ public class Run {
 				win.addobserver(c);
 				win.run();*/
 				
-				MazeWindow maze;
-				
-				
+				//MazeWindow maze;
+				StartWindow start=new StartWindow("hello", 500, 500);
+				MyModel m=new MyModel(4);
+				Presenter c=new Presenter(start,m);
+				m.addObserver(c);
+				start.addobserver(c);
+				start.run();
 				
 			}
 	}
