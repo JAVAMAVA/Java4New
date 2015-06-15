@@ -14,6 +14,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 import presenter.Presenter;
@@ -28,6 +29,7 @@ public class MazeWindow extends BasicWindow implements View{
 	MyBoard gameBoard;
 	public Command lastcommand;
 	private HashMap<String, Command> comm;
+	public Maze myMaze;
 	
 	public MazeWindow(String title,int width , int height) {
 		super(title, width, height);
@@ -42,6 +44,7 @@ public class MazeWindow extends BasicWindow implements View{
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
 		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		
 		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
 			
 

@@ -18,43 +18,19 @@ import org.eclipse.swt.widgets.Shell;
 
 
 public class MazeCellCanvas extends Canvas {
-
+	String side;
 	
-	Image UpWall;
-	Image DownWall;
-	Image LeftWall;
-	Image RightWall;
-		
 	
 	public MazeCellCanvas(MyBoard Board, int style,String side,Shell shell,Display display) {
 		super(Board, style);
+		this.side=side;
 		//this = new Canvas(shell, SWT.NONE);
-		
-		Image UpWall = new Image(display,"WallUp.jpg");
-		Image DownWall = new Image(display,"WallUp.jpg");
-		Image LeftWall = new Image(display,"WallLeft.jpg");
-		Image RightWall = new Image(display,"WallUp.jpg");
-		
 		addPaintListener(new PaintListener() {
+			@Override
 			  public void paintControl(PaintEvent e) {
 			        
-			    if(side == "Right"){
-			    	e.gc.drawImage(RightWall, 0, 0);
-			    	//e.gc.drawImage(image, 0, 0, srcWidth, srcHeight, destX, destY, destWidth, destHeight);
-				}
-				else
-					if(side =="Left"){
-						e.gc.drawImage(LeftWall, 0, 0);
-					}
-					else
-						if(side == "Up"){
-							e.gc.drawImage(UpWall, 0, 0);
-						}
-						else
-							if(side == "Down"){
-								e.gc.drawImage(DownWall, 0, 0);
-							}
-			  }	
-		});
-	}
+			    e.gc.drawImage(new Image(display, "Images//floor"+side+".jpg"), 0, 0);
+			    }
+			  });
+		}
 }

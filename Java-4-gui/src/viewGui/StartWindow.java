@@ -6,8 +6,11 @@ import java.util.Observer;
 import javax.swing.ButtonModel;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -80,7 +83,28 @@ public class StartWindow extends BasicWindow implements View  {
 		okbutton.setText("OK");
 		okbutton.setFont(new Font(display, "Arial", 12, SWT.NORMAL));
 		okbutton.setLayoutData(new GridData(SWT.RIGHT ,SWT.BOTTOM, false,true,2,1));
-		
+		okbutton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				if (TROW.getText()!="" && TCOLUMN.getText()!="")
+				{
+					MazeWindow mW=new MazeWindow("My Maze Window",500, 500);
+					mW.start();
+					mW.myMaze=new Maze(Integer.parseInt(TROW.getText()),Integer.parseInt(TCOLUMN.getText()));
+					//shell.dispose();	
+				}
+			
+			
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				
+			}
+			});
+		//Image i =new Image(display,"Images//Pickacho.jpg");
+		// okbutton.setImage(i);
 		
 		
 	}

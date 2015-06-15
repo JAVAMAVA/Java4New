@@ -1,5 +1,6 @@
 package viewGui;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -18,11 +19,11 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	
 	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell) {
 		super();
-		this.Board = board;
 		this.m = getMyMaze(10, 10);
 		this.dis = display;
 		this.sh =shell;
 		this.style = style;
+		this.Board=board; 
 			
 		
 	}
@@ -36,19 +37,25 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	 */
 	public void drawMaze(Maze matrix,MyBoard Board,int style, Display display,Shell shell,int rows,int cols)
 	{
+		String str="";
 		for(int i=0;i<matrix.getRows();i++)
 		{
 			for (int j=0;j<matrix.getCols();j++)
 			{
+				if (matrix.getCell(i, j).getUp()==true)
+					str+="U";
+				if (matrix.getCell(i, j).getRight()==true)
+					str+="R";
 				if (matrix.getCell(i, j).getDown())
-					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Down", shell, display);
-				if (matrix.getCell(i, j).getUp())
-					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Up", shell, display);
-				if (matrix.getCell(i, j).getRight())
-					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Right", shell, display);
-				if (matrix.getCell(i, j).getRight())
-					Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, "Left", shell, display);
+					str+="D";
+				if (matrix.getCell(i, j).getLeft()==true)
+					str+="L";
+					
+				Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, str, shell, display);	
+				str="";
 			}
+			
+			
 		}
 
 	}
