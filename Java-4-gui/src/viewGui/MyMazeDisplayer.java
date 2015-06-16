@@ -51,7 +51,7 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 				if (matrix.getCell(i, j).getLeft()==true)
 					str+="L";
 					
-				Board.boardGame[i][j] = new MazeCellCanvas(this.Board, style, str, shell, display);	
+				Board.boardGame[i][j] = new MazeCanvas(this.Board, style, str, shell, display);	
 				str="";
 			}
 			

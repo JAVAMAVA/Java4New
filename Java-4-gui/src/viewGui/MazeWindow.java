@@ -43,8 +43,8 @@ public class MazeWindow extends BasicWindow implements View{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
-		
+		//gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		MazeCanvas maze=new MazeCanvas(Board, style, side, shell, display)
 		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
 			
 
