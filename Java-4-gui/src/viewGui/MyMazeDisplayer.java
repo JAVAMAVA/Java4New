@@ -2,30 +2,31 @@ package viewGui;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 
 public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	
-	MyBoard Board;
+	//MyBoard Board;
 	Maze m;
-	Display dis;
-	Shell sh;
 	int style;
 	
-	public MyMazeDisplayer(MyBoard board, int style, Display display,Shell shell) {
+	
+	
+	public MyMazeDisplayer(MyBoard board,Maze myMaze) {
 		super();
-		this.m = getMyMaze(10, 10);
-		this.dis = display;
-		this.sh =shell;
-		this.style = style;
-		this.Board=board; 
-			
-		
+		this.m = myMaze;
+		this.board=board;
+		//this.style = style;	
 	}
 	
 	
@@ -35,23 +36,36 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	 * The method drawMaze draws the maze it gets into the board. It draws each cell as a way and around it the wall, if the wall is vertical it draws the WallVertical and if the wall is horizontal it draws a WallHorizontal
 	 * @param matrix - the {@link Maze} that need to draw in the board
 	 */
-	public void drawMaze(Maze matrix,MyBoard Board,int style, Display display,Shell shell,int rows,int cols)
+	@Override
+	public void draw(PaintEvent e)
 	{
+			   if(this.board.boardGame==null){
+					this.board.boardGame=new Canvas[m.getRows()][m.getCols()];
+					
+			   }
 		String str="";
-		for(int i=0;i<matrix.getRows();i++)
+		for(int i=0;i<m.getRows();i++)
 		{
-			for (int j=0;j<matrix.getCols();j++)
+			for (int j=0;j<m.getCols();j++)
 			{
-				if (matrix.getCell(i, j).getUp()==true)
+				if (m.getCell(i, j).getUp()==true)
 					str+="U";
-				if (matrix.getCell(i, j).getRight()==true)
+				if (m.getCell(i, j).getRight()==true)
 					str+="R";
-				if (matrix.getCell(i, j).getDown())
+				if (m.getCell(i, j).getDown())
 					str+="D";
-				if (matrix.getCell(i, j).getLeft()==true)
+				if (m.getCell(i, j).getLeft()==true)
 					str+="L";
 					
-				Board.boardGame[i][j] = new MazeCanvas(this.Board, style, str, shell, display);	
+				this.board.boardGame[i][j] = new Canvas(this.board, SWT.FILL);
+				this.board.boardGame[i][j].addPaintListener(new PaintListener() {
+					
+					@Override
+					public void paintControl(PaintEvent arg0) {
+						e.gc.drawImage(new Image(e.display, "Images//floor"+str+".png"), 0, 0);
+						
+					}
+				});
 				str="";
 			}
 			
@@ -127,6 +141,56 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	public void displaySol(PaintEvent maze) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+
+
+
+
+
+	@Override
+	public void drawSol(GC gc, Solution sol) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void undrawSol(GC gc, Solution sol) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public Object getTile(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public int getRows() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+	@Override
+	public int getCols() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

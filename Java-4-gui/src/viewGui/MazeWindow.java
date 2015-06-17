@@ -3,7 +3,6 @@ package viewGui;
 
 import java.util.HashMap;
 import java.util.Observer;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -16,7 +15,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
-
 import presenter.Presenter;
 import presenter.Presenter.Command;
 import view.View;
@@ -30,11 +28,13 @@ public class MazeWindow extends BasicWindow implements View{
 	public Command lastcommand;
 	private HashMap<String, Command> comm;
 	public Maze myMaze;
+	public MazeDispleyer md;
 	
-	public MazeWindow(String title,int width , int height) {
+	
+	public MazeWindow(String title,int width , int height,MyBoard gameBoard,MazeDispleyer md) {
 		super(title, width, height);
-	
-		// TODO Auto-generated constructor stub
+		this.gameBoard=gameBoard;
+		this.md=md;
 	}
 	
 	
@@ -43,8 +43,8 @@ public class MazeWindow extends BasicWindow implements View{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		//gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
-		MazeCanvas maze=new MazeCanvas(Board, style, side, shell, display)
+		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));
 		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
 			
 
@@ -89,7 +89,7 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		
 		createMaze.setText("Create new Maze");
-		createMaze.setLayoutData(new GridData(SWT.CENTER, SWT.TOP,false,false,1,1));
+		
 		createMaze.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -196,9 +196,14 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 	
+
+	public void setGameBoard(MyBoard gameboard){
+		this.gameBoard = gameboard;
+	}
 	
-
-
+	public void setDisplayer(MazeDispleyer md){
+		this.md = md;
+	}
 
 	@Override
 	public Command getUserCommand() {
