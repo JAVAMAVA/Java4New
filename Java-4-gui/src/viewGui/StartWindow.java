@@ -89,9 +89,9 @@ public class StartWindow extends BasicWindow implements View  {
 			public void widgetSelected(SelectionEvent arg0) {
 				if (TROW.getText()!="" && TCOLUMN.getText()!="")
 				{
-					MazeWindow mW=new MazeWindow("My Maze Window",500, 500);
-					mW.start();
-					mW.myMaze=new Maze(Integer.parseInt(TROW.getText()),Integer.parseInt(TCOLUMN.getText()));
+					//MazeWindow mW=new MazeWindow("My Maze Window",500, 500);
+					//mW.start();
+					//mW.myMaze=new Maze(Integer.parseInt(TROW.getText()),Integer.parseInt(TCOLUMN.getText()));
 					//shell.dispose();	
 				}
 			

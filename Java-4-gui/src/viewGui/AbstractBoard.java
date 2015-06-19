@@ -1,19 +1,39 @@
 package viewGui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+
+import algorithms.mazeGenerators.Maze;
 
 
 public abstract class AbstractBoard extends Composite implements Board{
 
-	public Canvas boardGame[][];
+	public MazeCanvas boardGame[][];
 	MyGameCharacter character;
+	Maze matrix;
 	
-	public AbstractBoard(Composite parent, int style) {
+	public AbstractBoard(Composite parent, int style,Maze m) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
-		boardGame=new Canvas[10][10];
+		this.matrix=m;
+		addPaintListener(new PaintListener() {
+			
+			@Override
+			public void paintControl(PaintEvent e) {
+				
+					drawMaze(e);
+			}
+		});
 		
+		
+		
+	}
+	public void AddImages()
+	{
 		
 	}
 
@@ -35,6 +55,43 @@ public abstract class AbstractBoard extends Composite implements Board{
 		this.character = character;
 	}
 	
+	
+	public void setMaze(Maze matrix)
+	{
+		this.matrix=matrix;
+		this.redraw();
+	}
+	
+	/**
+	 * The method draws the maze into the boardgame
+	 */
+	public void drawMaze(PaintEvent e)
+	{
+		String temp="";
+		if(boardGame!=null)
+		{
+			for(int i=0;i<matrix.getRows();i++)
+			{
+				for(int j=0;j<matrix.getCols();j++)
+				{
+					if(matrix.getCell(i, j).getUp()==true)
+						temp+="U";
+					if(matrix.getCell(i, j).getRight()==true)
+						temp+="R";
+					if(matrix.getCell(i, j).getDown()==true)
+						temp+="D";
+					if(matrix.getCell(i, j).getLeft()==true)
+						temp+="L";
+					
+					boardGame[i][j]=new MazeCanvas(this, SWT.FILL);
+					boardGame[i][j].setcImage(new Image(this.getDisplay(), "Images//floor"+temp+".png"));
+					boardGame[i][j].setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+				
+				}
+			}
+		}
+	}
+		
 	
 
 }
