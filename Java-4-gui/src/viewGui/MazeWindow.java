@@ -46,7 +46,14 @@ public class MazeWindow extends BasicWindow implements View{
 		Maze m=new Maze(10, 10);
 		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
 		//md=new MyMazeDisplayer(gameBoard, m);
-		gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));
+		
+		GridLayout boardLayout = new GridLayout(m.getCols(), true);
+		boardLayout.horizontalSpacing = 0;
+		boardLayout.verticalSpacing = 0;
+		gameBoard.setLayout(boardLayout);
+		
+		
+		//gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));
 		
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
