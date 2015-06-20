@@ -26,6 +26,7 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 		super();
 		this.m = myMaze;
 		this.board=board;
+		
 		//this.style = style;	
 	}
 	
@@ -37,54 +38,20 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	 * @param matrix - the {@link Maze} that need to draw in the board
 	 */
 	@Override
-	public void draw(PaintEvent e)
+	public void draw()
 	{
-			   if(this.board.boardGame==null){
-					this.board.boardGame=new Canvas[m.getRows()][m.getCols()];
-					
-			   }
-		String str="";
-		for(int i=0;i<m.getRows();i++)
-		{
-			for (int j=0;j<m.getCols();j++)
-			{
-				if (m.getCell(i, j).getUp()==true)
-					str+="U";
-				if (m.getCell(i, j).getRight()==true)
-					str+="R";
-				if (m.getCell(i, j).getDown())
-					str+="D";
-				if (m.getCell(i, j).getLeft()==true)
-					str+="L";
-					
-				this.board.boardGame[i][j] = new Canvas(this.board, SWT.FILL);
-				this.board.boardGame[i][j].addPaintListener(new PaintListener() {
-					
-					@Override
-					public void paintControl(PaintEvent arg0) {
-						e.gc.drawImage(new Image(e.display, "Images//floor"+str+".png"), 0, 0);
-						
-					}
-				});
-				str="";
-			}
-			
-			
-		}
+			 
+			if (this.board.boardGame!=null)
+				for(int i=0;i<this.m.getRows();i++)
+				{
+					for(int j=0;j<this.m.getCols();j++)
+						board.boardGame[i][j].redraw();
+				}
 
 	}
 	
 	
-	@Override
-	public void display(PaintEvent maze) {
-		
-		GridLayout mLayout = new GridLayout(0, false); //needs changing
-		
-		drawMaze(this.m, Board, style, dis, sh, this.m.getRows(), this.m.getRows());
-		
-		
-		
-	}
+
 	
 	
 //	/**

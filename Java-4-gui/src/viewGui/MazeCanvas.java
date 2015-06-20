@@ -1,6 +1,7 @@
 package viewGui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.PaintObjectListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.PaintEvent;
@@ -38,8 +39,8 @@ public class MazeCanvas extends Canvas {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				e.gc.drawImage(CellImage, 0, 0,CellImage.getBounds().width, CellImage.getBounds().height, 0, 0, width, height);
 				
+				drawCanvas(e);
 			}
 		});
 		
@@ -66,11 +67,17 @@ public class MazeCanvas extends Canvas {
 	}
 		
 		public void setcImage(Image cImage) {
-			synchronized (this) {
-				this.CellImage = cImage;	
-			}
+				this.width=this.getSize().x;
+				this.height=this.getSize().y;
+				this.CellImage = cImage;
 		}
-		// TODO Auto-generated constructor stub
+		void drawCanvas(PaintEvent e)
+		{
+			if(this.CellImage!=null){ //display image of the tile
+		        ImageData data = CellImage.getImageData();
+		        e.gc.drawImage(CellImage,0,0,data.width,data.height,0,0,width,height);
+				}
+		}
 }
 	
 	/*public MazeCanvas(MyBoard board,int style,String side,Shell shell,Display display) {

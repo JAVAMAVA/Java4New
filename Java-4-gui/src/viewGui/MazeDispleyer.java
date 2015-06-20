@@ -14,10 +14,7 @@ import algorithms.search.Solution;
  */
 
 public interface MazeDispleyer {
-	void draw(PaintEvent e);
-	void drawSol(GC gc, Solution sol);
-	void undrawSol(GC gc, Solution sol);
-	Object getTile(int i,int j);
+	void draw();
 	int getRows();
 	int getCols();
 }

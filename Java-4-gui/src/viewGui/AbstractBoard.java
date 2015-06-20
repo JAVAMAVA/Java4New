@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
@@ -37,11 +38,11 @@ public abstract class AbstractBoard extends Composite implements Board{
 		
 	}
 
-	public Canvas[][] getBoardGame() {
+	public MazeCanvas[][] getBoardGame() {
 		return boardGame;
 	}
 
-	public void setBoardGame(Canvas[][] boardGame) {
+	public void setBoardGame(MazeCanvas[][] boardGame) {
 		this.boardGame = boardGame;
 	}
 
@@ -68,8 +69,8 @@ public abstract class AbstractBoard extends Composite implements Board{
 	public void drawMaze(PaintEvent e)
 	{
 		String temp="";
-		if(boardGame!=null)
-		{
+		boardGame=new MazeCanvas[this.matrix.getRows()][this.matrix.getCols()];
+		
 			for(int i=0;i<matrix.getRows();i++)
 			{
 				for(int j=0;j<matrix.getCols();j++)
@@ -84,12 +85,12 @@ public abstract class AbstractBoard extends Composite implements Board{
 						temp+="L";
 					
 					boardGame[i][j]=new MazeCanvas(this, SWT.FILL);
-					boardGame[i][j].setcImage(new Image(this.getDisplay(), "Images//floor"+temp+".png"));
+					boardGame[i][j].setcImage(new Image(this.getDisplay(), "Images//FloorImages//floor"+temp+".jpg"));
 					boardGame[i][j].setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+					temp="";
 				
 				}
 			}
-		}
 	}
 		
 	

@@ -31,10 +31,10 @@ public class MazeWindow extends BasicWindow implements View{
 	public MazeDispleyer md;
 	
 	
-	public MazeWindow(String title,int width , int height,MyBoard gameBoard,MazeDispleyer md) {
+	public MazeWindow(String title,int width , int height) {
 		super(title, width, height);
-		this.gameBoard=gameBoard;
-		this.md=md;
+		
+		
 	}
 	
 	
@@ -43,42 +43,11 @@ public class MazeWindow extends BasicWindow implements View{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		Maze m=new Maze(10, 10);
+		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
+		//md=new MyMazeDisplayer(gameBoard, m);
 		gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));
-		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
-			
-
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				
-				 if (arg0.keyCode == SWT.ARROW_UP){
-					 //move up
-					 //list todo:
-					 //moving the index of the character
-					 //canvas[][].redraw ->redraws to old thing(if problem, do redraw whole maze)
-					 //gamechar.paint
-					 
-					 
-				 }
-				 if (arg0.keyCode == SWT.ARROW_DOWN){
-					 //move down
-				 }
-				 if (arg0.keyCode == SWT.ARROW_LEFT){
-					 //move left
-				 }
-				 if (arg0.keyCode == SWT.ARROW_RIGHT){
-					 //move right
-				 }
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				
-				
-			}
-		});
+		
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
 		

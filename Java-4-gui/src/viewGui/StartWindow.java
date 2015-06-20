@@ -82,6 +82,7 @@ public class StartWindow extends BasicWindow implements View  {
 		Button okbutton =new Button(shell, SWT.None);
 		okbutton.setText("OK");
 		okbutton.setFont(new Font(display, "Arial", 12, SWT.NORMAL));
+		//okbutton.setImage(new Image(this.display,"Images//FloorImages//floorU.jpg"));
 		okbutton.setLayoutData(new GridData(SWT.RIGHT ,SWT.BOTTOM, false,true,2,1));
 		okbutton.addSelectionListener(new SelectionListener() {
 			
