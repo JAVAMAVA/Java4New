@@ -50,7 +50,7 @@ public class MazeWindow extends BasicWindow implements View{
 		Maze m=new Maze(10, 10);
 		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
 		gameBoard.layout();
-		gameBoard.redraw();
+		//gameBoard.redraw();
 		//md=new MyMazeDisplayer(gameBoard, m);
 		
 		GridLayout boardLayout = new GridLayout(m.getCols(), true);

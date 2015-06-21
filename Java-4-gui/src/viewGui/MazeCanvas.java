@@ -32,7 +32,7 @@ public class MazeCanvas extends Canvas {
 		}
 		void drawCanvas(PaintEvent e)
 		{
-			
+			drawCell(e, 0, 0, getSize().x,getSize().y);
 		}
 		
 		public void drawCell(PaintEvent e, int x, int y, int w, int h){

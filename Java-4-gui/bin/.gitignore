@@ -1,1 +1,6 @@
+/boot/
+/model/
+/presenter/
+/view/
 /viewGui/
+/MyGameCharacter.class
