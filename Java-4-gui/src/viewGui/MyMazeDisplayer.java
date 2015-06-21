@@ -47,7 +47,12 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 					for(int j=0;j<this.m.getCols();j++)
 						board.boardGame[i][j].redraw();
 				}
+			
 
+	}
+	
+	public void setData(Object obj){
+		this.m = (Maze)obj;
 	}
 	
 	

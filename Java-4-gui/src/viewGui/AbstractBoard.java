@@ -87,10 +87,12 @@ public abstract class AbstractBoard extends Composite implements Board{
 					boardGame[i][j]=new MazeCanvas(this, SWT.FILL);
 					boardGame[i][j].setcImage(new Image(this.getDisplay(), "Images//FloorImages//floor"+temp+".jpg"));
 					boardGame[i][j].setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+					boardGame[i][j].drawCell(e, (getSize().x/matrix.getCols())*i , (getSize().y/matrix.getRows())*j , (getSize().x/matrix.getCols()), (getSize().y/matrix.getRows()));
 					temp="";
 				
 				}
 			}
+			
 	}
 		
 	

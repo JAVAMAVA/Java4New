@@ -28,6 +28,8 @@ public class MyBoard extends AbstractBoard{
 			
 			@Override
 			public void paintControl(PaintEvent arg0) { //moving the character
+				if(boardGame==null)
+					drawMaze(arg0);
 				myMaze.draw(); //send to him arg0
 				//set char
 				//mymaze.redraw
@@ -38,7 +40,6 @@ public class MyBoard extends AbstractBoard{
 		});
 		addKeyListener(new KeyListener() { //listening to the client key arrows
 			
-
 			
 			@Override
 			public void keyReleased(KeyEvent arg0) {

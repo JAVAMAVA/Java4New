@@ -1,8 +1,10 @@
 package viewGui;
 
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -15,6 +17,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Layout;
+
 import presenter.Presenter;
 import presenter.Presenter.Command;
 import view.View;
@@ -45,6 +49,8 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		Maze m=new Maze(10, 10);
 		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
+		gameBoard.layout();
+		gameBoard.redraw();
 		//md=new MyMazeDisplayer(gameBoard, m);
 		
 		GridLayout boardLayout = new GridLayout(m.getCols(), true);
@@ -70,12 +76,15 @@ public class MazeWindow extends BasicWindow implements View{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				lastcommand=comm.get("generate maze");
-				hasChanged();
-				notifyObservers("new maze");
-				lastcommand=comm.get("display maze");
-				hasChanged();
-				notifyObservers("display maze");
+				
+				
+				
+//				lastcommand=comm.get("generate maze");
+//				hasChanged();
+//				notifyObservers("new maze");
+//				lastcommand=comm.get("display maze");
+//				hasChanged();
+//				notifyObservers("display maze");
 				//need to put in the board the maze that was created
 				
 			}
@@ -95,7 +104,8 @@ public class MazeWindow extends BasicWindow implements View{
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				
-				
+				setChanged();
+				notifyObservers("GenerateMaze momo:6,6");
 			}
 			
 			@Override
@@ -169,7 +179,6 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		
 		
-		
 	}
 	
 
@@ -206,9 +215,7 @@ public class MazeWindow extends BasicWindow implements View{
 
 	@Override
 	public void setCommands(HashMap<String, Command> comm) {
-		this.comm=comm;
-		c.hm=comm;
-		
+		//TODO
 	}
 
 	@Override
@@ -234,9 +241,7 @@ public class MazeWindow extends BasicWindow implements View{
 		// TODO Auto-generated method stub
 		
 	}
-	public void setPresenter(Presenter c){
-		this.c=c;
-	}
+
 
 	
 	
