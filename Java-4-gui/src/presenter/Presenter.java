@@ -35,7 +35,7 @@ public class Presenter implements Observer {
 		comm.put("generate maze",new GenerateMazeCommand());
 		comm.put("display maze", new DisplayMazeCommand());
 		comm.put("solve maze", new SolveMazeCommand());
-		comm.put("display solution", new DisplayMazeCommand());
+		comm.put("display solution", new DisplaySolutionCommand());
 		comm.put("exit", new ExitCommand());
 		v.setCommands(comm);
 	}
@@ -46,11 +46,11 @@ public class Presenter implements Observer {
 	@Override
 	public void update(Observable o, Object args) {
 			//if the view notified the presenter
-		   if(o == v) {
+ 		   if(o == v) {
 			   if((String)args=="start")
 			   {
 				   v.setCommands(comm);
-			   	v.displaySuccess("done");
+				   v.displaySuccess("done");
 			   }
 			   else if((String)args=="exit")
 			   {

@@ -43,11 +43,12 @@ public class MyModel extends java.util.Observable implements Model {
 	Maze currMaze;
 	Solution currSol;
 	String mazeAlg="DFS";
-	String solveAlg="bfs";
+	String solveAlg="Bfs";
 	
 	
 	public MyModel(int SizeOfThreadPool) {
 		mazeNames=new HashMap<>();
+		mazeSolutions =new HashMap<>();
 		pool = new ThreadPoolExecutor(0, SizeOfThreadPool, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4));
 		ConcurrentHashMap<Maze,Solution> mazeSolutions = new ConcurrentHashMap<Maze,Solution>();
 		ConcurrentHashMap<String,Maze> mazeNames = new ConcurrentHashMap<String, Maze>();
@@ -372,16 +373,20 @@ public class MyModel extends java.util.Observable implements Model {
 	 */
 	@Override
 	public void getSolutionInModel(String arg) {
-		if(mazeSolutions.get(arg)!=null)
+		
+		if(mazeNames.get(arg)!=null)
 		{
-			setChanged();
-			currSol=mazeSolutions.get(arg);
-			notifyObservers("Solution was found");
+			if(mazeSolutions.get(mazeNames.get(arg))!=null)
+			{
+				setChanged();
+				currSol=mazeSolutions.get(mazeNames.get(arg));
+				notifyObservers("Solution was found");
 				
+			}
 		}
 		else {
 			setChanged();
-			notifyObservers("Solution was not found");
+			notifyObservers("Maze was not found");
 			}
 		
 	}

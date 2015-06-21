@@ -53,7 +53,9 @@ public class MyCLI extends CLI implements Runnable  {
 						v.setLastCommand(hm.get(commandName));
 						v.notifyArg(sp[2]);
 					}
+					System.out.println("Enter a command");
 					Line=in.readLine();
+					
 			}
 					
 		} catch (IOException e) {

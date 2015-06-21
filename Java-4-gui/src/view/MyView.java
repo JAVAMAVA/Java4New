@@ -80,7 +80,7 @@ public class MyView extends Observable implements View {
 	 */
 	@Override
 	public void displayMaze(Maze m) {
-		System.out.println("displaying maze");
+		m.print();
 		
 	}
 	/**
