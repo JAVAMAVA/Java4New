@@ -1,6 +1,7 @@
 package boot;
 
 import presenter.Presenter;
+import view.MyView;
 import viewGui.MazeWindow;
 import viewGui.StartWindow;
 import model.MyModel;
@@ -11,6 +12,7 @@ public class Run {
 				
 				MyModel m=new MyModel(4);
 				MazeWindow win=new MazeWindow("My Ascii art window",1000, 1000);
+				//MyView win=new MyView();
 				Presenter c=new Presenter(win,m);
 				m.addObserver(c);
 				win.addobserver(c);

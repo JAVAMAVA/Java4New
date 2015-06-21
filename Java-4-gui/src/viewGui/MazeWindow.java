@@ -2,6 +2,7 @@ package viewGui;
 
 
 import java.lang.ProcessBuilder.Redirect;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observer;
 
@@ -14,6 +15,7 @@ import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -28,6 +30,7 @@ import presenter.Presenter.Command;
 import view.View;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import algorithms.search.State;
 
 
 public class MazeWindow extends BasicWindow implements View{
@@ -43,21 +46,23 @@ public class MazeWindow extends BasicWindow implements View{
 		super(title, width, height);
 		
 		
+		
 	}
 	
-	
-	
+	/**
+	 * initWidgets overrides the super method
+	 * it initializes the widgets in the display windows and runs them
+	 */
 	@Override
 	void initWidgets() {
 		
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		Maze m=new Maze(10, 10);
+		Maze m=new Maze(20,20);
 		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
 		gameBoard.layout();
 		
 		gameBoard.addListener(SWT.RESIZE, new Listener() {
-			
 			@Override
 			public void handleEvent(Event arg0) {
 				gameBoard.drawBoard();
@@ -65,26 +70,20 @@ public class MazeWindow extends BasicWindow implements View{
 		});
 		
 		gameBoard.addMouseListener(new MouseListener() {
-			
 			GameCharacter myChar = null;
 			
 			@Override
 			public void mouseUp(MouseEvent arg0) {
-				
 				if(myChar == null)
 					return;
-				
 //				TODO move character
-				
 				myChar = null;
 			}
 			
 			@Override
 			public void mouseDown(MouseEvent arg0) {
-				
 //				if((arg0.x/(gameBoard.getSize().x/md.getCols())) == gameBoard.getCharacter().x && )
 //				check if there is a click on a Cell the character is in.
-				
 			}
 			
 			@Override
@@ -105,7 +104,6 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
-		
 		Button startGame=new Button(shell, SWT.PUSH);
 		Button exitGame=new Button(shell, SWT.PUSH);
 		Button clue=new Button(shell, SWT.PUSH);
@@ -118,17 +116,9 @@ public class MazeWindow extends BasicWindow implements View{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+				generatemaze();
 				
-				
-				
-//				lastcommand=comm.get("generate maze");
-//				hasChanged();
-//				notifyObservers("new maze");
-//				lastcommand=comm.get("display maze");
-//				hasChanged();
-//				notifyObservers("display maze");
-				//need to put in the board the maze that was created
-				
+								
 			}
 
 			@Override
@@ -145,9 +135,8 @@ public class MazeWindow extends BasicWindow implements View{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				
-				setChanged();
-				notifyObservers("GenerateMaze momo:6,6");
+				startgame();
+				gameBoard.forceFocus();
 			}
 			
 			@Override
@@ -162,7 +151,9 @@ public class MazeWindow extends BasicWindow implements View{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				
+				//display.close();
+				shell.close();
 				
 			}
 			
@@ -180,7 +171,13 @@ public class MazeWindow extends BasicWindow implements View{
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
+				lastcommand=comm.get("solve maze");
+				setChanged();
+				notifyObservers("amit");
+				gameBoard.forceFocus();
+				lastcommand=comm.get("display solution");
+				setChanged();
+				notifyObservers("amit");
 				
 			}
 			
@@ -224,6 +221,22 @@ public class MazeWindow extends BasicWindow implements View{
 	}
 	
 
+	protected void startgame() {
+		gameBoard.startgame=true;
+		gameBoard.redraw();
+		
+	}
+
+	protected void generatemaze() {
+		
+		gameBoard.matrix.print();
+		lastcommand=comm.get("generate maze");
+		setChanged();
+		notifyObservers("amit");
+		gameBoard.matrix.print();
+		
+	}
+
 	public void setGameBoard(MyBoard gameboard){
 		this.gameBoard = gameboard;
 	}
@@ -239,13 +252,22 @@ public class MazeWindow extends BasicWindow implements View{
 
 	@Override
 	public void displayMaze(Maze m) {
-	
+		gameBoard.newmaze=true;
+		gameBoard.setMaze(m);
+		gameBoard.forceFocus();
 		
 	}
 
 	@Override
 	public void displaySolution(Solution s) {
-		// TODO Auto-generated method stub
+		int x=gameBoard.character.x;
+		int y=gameBoard.character.y;
+		State temp;
+		SolutionCharacter mgc=new SolutionCharacter(new Image(gameBoard.getDisplay(), "ImagesCharacters\\Dragon\\DragonF.png"), x, y);
+		gameBoard.sol=s;
+		gameBoard.solcaracter=mgc;
+		gameBoard.solve=true;
+		gameBoard.redraw();
 		
 	}
 
@@ -257,7 +279,7 @@ public class MazeWindow extends BasicWindow implements View{
 
 	@Override
 	public void setCommands(HashMap<String, Command> comm) {
-		//TODO
+		this.comm=comm;
 	}
 
 	@Override
@@ -280,8 +302,14 @@ public class MazeWindow extends BasicWindow implements View{
 
 	@Override
 	public void addobserver(Observer observer) {
-		// TODO Auto-generated method stub
+		this.addObserver(observer);
 		
+	}
+
+	@Override
+	public HashMap<String, Command> getHM() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

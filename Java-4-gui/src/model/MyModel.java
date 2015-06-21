@@ -17,6 +17,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import javax.xml.crypto.dsig.spec.HMACParameterSpec;
+
 import algorithms.mazeGenerators.DFSMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.RandomMazeGenerator;
@@ -42,11 +44,13 @@ public class MyModel extends java.util.Observable implements Model {
 	HashMap<String,Maze> mazeNames;
 	Maze currMaze;
 	Solution currSol;
-	String mazeAlg;
-	String solveAlg;
+	String mazeAlg="DFS";
+	String solveAlg="Bfs";
 	
 	
 	public MyModel(int SizeOfThreadPool) {
+		mazeNames=new HashMap<>();
+		mazeSolutions =new HashMap<>();
 		pool = new ThreadPoolExecutor(0, SizeOfThreadPool, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4));
 		ConcurrentHashMap<Maze,Solution> mazeSolutions = new ConcurrentHashMap<Maze,Solution>();
 		ConcurrentHashMap<String,Maze> mazeNames = new ConcurrentHashMap<String, Maze>();
@@ -129,6 +133,9 @@ public class MyModel extends java.util.Observable implements Model {
 	 */
 	@Override
 	public void solveMaze(String name) {
+		if(mazeNames!=null && mazeNames.get(name)!=null)
+		{
+		
 		System.out.println("Solving Maze");
 		Solution solution;
 		
@@ -181,8 +188,15 @@ public class MyModel extends java.util.Observable implements Model {
 				e.printStackTrace();
 			}
 			break;
-		
 		}
+		}
+		
+		else
+			{
+			setChanged();
+			notifyObservers("Maze was not found");
+			
+			}
 		
 		
 		
@@ -227,7 +241,7 @@ public class MyModel extends java.util.Observable implements Model {
 		}
 		else{
 			setChanged();
-			notifyObservers("maze not found");
+			notifyObservers("Maze was not found");
 		}
 	}
 	/**
@@ -235,10 +249,13 @@ public class MyModel extends java.util.Observable implements Model {
 	 * @param name the maze name we got
 	 */
 	public void checkMaze(String name){
+		if(mazeNames!=null)
+		{
 		if(mazeNames.get(name) != null){
 			currMaze = mazeNames.get(name);
 			setChanged();
 			notifyObservers("Maze already exists");
+		}
 		}
 	}
 	/**
@@ -346,12 +363,15 @@ public class MyModel extends java.util.Observable implements Model {
 	 */
 	@Override
 	public void getMazeInModel(String arg) {
-		if(mazeNames.get(arg)!=null)
+		if(mazeNames!=null)
 		{
-			setChanged();
-			currMaze=mazeNames.get(arg);
-			notifyObservers("Maze was found");
+			if(mazeNames.get(arg)!=null)
+				{
+					setChanged();
+					currMaze=mazeNames.get(arg);
+					notifyObservers("Maze was found");
 				
+				}
 		}
 		else {
 			setChanged();
@@ -365,16 +385,20 @@ public class MyModel extends java.util.Observable implements Model {
 	 */
 	@Override
 	public void getSolutionInModel(String arg) {
-		if(mazeSolutions.get(arg)!=null)
+		
+		if(mazeNames.get(arg)!=null)
 		{
-			setChanged();
-			currSol=mazeSolutions.get(arg);
-			notifyObservers("Solution was found");
+			if(mazeSolutions.get(mazeNames.get(arg))!=null)
+			{
+				setChanged();
+				currSol=mazeSolutions.get(mazeNames.get(arg));
+				notifyObservers("Solution was found");
 				
+			}
 		}
 		else {
 			setChanged();
-			notifyObservers("Solution was not found");
+			notifyObservers("Maze was not found");
 			}
 		
 	}

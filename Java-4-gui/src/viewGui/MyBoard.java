@@ -21,11 +21,11 @@ public class MyBoard extends AbstractBoard{
 	
 	
 
-	
+	public boolean startgame;
 	
 	public MyBoard(Composite parent, int style,Display display,Shell shell,Maze m) {
 		super(parent, style | SWT.DOUBLE_BUFFERED,m);
-		
+		startgame=false;
 		myMaze = new MyMazeDisplayer(this, this.matrix);
 		this.character=new MyGameCharacter(new Image(this.getDisplay(), "ImagesCharacters//BlueBoy//BHSF.png"), 0, 0);
 		addPaintListener(new PaintListener() {
@@ -35,6 +35,8 @@ public class MyBoard extends AbstractBoard{
 				if(boardGame==null)
 					drawMaze(e);
 				//myMaze.draw(); //send to him arg0
+				System.out.println(startgame);
+				if(startgame==true)
 				character.paint(e.gc, getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
 				//set char
 				//mymaze.redraw
@@ -50,9 +52,12 @@ public class MyBoard extends AbstractBoard{
 			public void keyReleased(KeyEvent arg0) {
 				
 				 if (arg0.keyCode == SWT.ARROW_UP){
+					 character.chImage=new Image(getDisplay(), "ImagesCharacters//BlueBoy//BHSB.png");
+					 redraw();
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getUp()==false)
 					 {
 						character.setMoved(true);
+						
 						boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						character.setXCharater(character.getXCharater()-1);
 						
@@ -73,8 +78,11 @@ public class MyBoard extends AbstractBoard{
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_DOWN){
+					 character.chImage=new Image(getDisplay(), "ImagesCharacters//BlueBoy//BHSF.png");
+					 redraw();
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getDown()==false)
 					 {
+						 
 						 ///character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						 character.setXCharater(character.getXCharater()+1);
@@ -89,8 +97,11 @@ public class MyBoard extends AbstractBoard{
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_LEFT){
+					 character.chImage=new Image(getDisplay(), "ImagesCharacters//BlueBoy//BHSL.png");
+					 redraw();
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getLeft()==false)
 					 {
+						
 						 //character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						character.setYCharater(character.getYCharater()-1);
@@ -105,8 +116,11 @@ public class MyBoard extends AbstractBoard{
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_RIGHT){
+					 character.chImage=new Image(getDisplay(), "ImagesCharacters//BlueBoy//BHSR.png");
+					 redraw();
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getRight()==false)
 					 {
+						
 						 //character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						 character.setYCharater(character.getYCharater()+1);

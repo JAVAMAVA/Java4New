@@ -22,6 +22,7 @@ public class MyGameCharacter implements GameCharacter {
 		
 		
 		  gc.drawImage(chImage, 0, 0,20 ,25,w*(this.y)+6,h*(this.x)+10, w-15, h-18);
+		  
 		
 		//else gc.drawImage(chImage, 0, 0,20 ,25,w*(this.y)+6,w*(this.x)+10, w-15, h-18);
 		//else gc.drawImage(chImage, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight);

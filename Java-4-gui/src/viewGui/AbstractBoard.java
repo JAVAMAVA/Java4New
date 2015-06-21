@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import algorithms.mazeGenerators.DFSMazeGenerator;
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 
 
 public abstract class AbstractBoard extends Composite implements Board{
@@ -19,18 +20,24 @@ public abstract class AbstractBoard extends Composite implements Board{
 	MyGameCharacter character;
 	Maze matrix;
 	AbstractMazeDispleyer myMaze;
+	boolean newmaze=false;
+	SolutionCharacter solcaracter;
+	Boolean solve=false;
+	Solution sol;
 	
 	public AbstractBoard(Composite parent, int style,Maze m) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
 		this.matrix=m;
-		DFSMazeGenerator dfs=new DFSMazeGenerator();
-		this.matrix=dfs.generateMaze(10, 10);
+		//DFSMazeGenerator dfs=new DFSMazeGenerator();
+		//this.matrix=dfs.generateMaze(10, 10);
 		matrix.print();
 		addPaintListener(new PaintListener() {
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-					if (boardGame==null)
+					if(solve==true)
+						solcaracter.paint(e.gc, getSize().y/matrix.getCols(), getSize().x/matrix.getRows(), sol);
+					if (boardGame==null || newmaze==true)
 						drawMaze(e);
 					else myMaze.draw(e);
 			}
@@ -115,6 +122,7 @@ public abstract class AbstractBoard extends Composite implements Board{
 				
 				}
 			}
+			newmaze=false;
 			
 	}
 		

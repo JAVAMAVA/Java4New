@@ -17,5 +17,5 @@ public interface View  {
 	void start(); 
 	void setLastCommand(Command comm);
 	void addobserver(Observer observer);
-
+	public HashMap<String, Command> getHM();
 }
