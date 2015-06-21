@@ -3,6 +3,8 @@ package viewGui;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.GC;
@@ -13,6 +15,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 
+import algorithms.mazeGenerators.Cell;
 import algorithms.mazeGenerators.Maze;
 
 
@@ -31,16 +34,14 @@ public class MyBoard extends AbstractBoard{
 		addPaintListener(new PaintListener() {
 			
 			@Override
-			public void paintControl(PaintEvent e) { //moving the character
+			public void paintControl(PaintEvent e) {
 				if(boardGame==null)
 					drawMaze(e);
-				//myMaze.draw(); //send to him arg0
+				
 				System.out.println(startgame);
 				if(startgame==true)
 				character.paint(e.gc, getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
-				//set char
-				//mymaze.redraw
-				// ....
+			
 				
 			}
 	
@@ -61,13 +62,7 @@ public class MyBoard extends AbstractBoard{
 						boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						character.setXCharater(character.getXCharater()-1);
 						
-						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
-						 
-					 //move up
-					 //list todo:
-					 //moving the index of the character
-					 //canvas[][].redraw ->redraws to old thing(if problem, do redraw whole maze)
-					 //gamechar.paint
+						
 					
 						redraw();
 						if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
@@ -83,11 +78,10 @@ public class MyBoard extends AbstractBoard{
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getDown()==false)
 					 {
 						 
-						 ///character.setMoved(true);
-						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
+					
 						 character.setXCharater(character.getXCharater()+1);
 						
-							//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
+						
 						 
 						 redraw();
 						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
@@ -102,11 +96,9 @@ public class MyBoard extends AbstractBoard{
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getLeft()==false)
 					 {
 						
-						 //character.setMoved(true);
-						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						character.setYCharater(character.getYCharater()-1);
 						 
-						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
+						
 						 
 						 redraw();
 						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
@@ -120,13 +112,7 @@ public class MyBoard extends AbstractBoard{
 					 redraw();
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getRight()==false)
 					 {
-						
-						 //character.setMoved(true);
-						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						 character.setYCharater(character.getYCharater()+1);
-						
-						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
-						 
 						 redraw();
 						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
 							{
@@ -143,6 +129,46 @@ public class MyBoard extends AbstractBoard{
 				
 			}
 		});
+	
+		addMouseListener(new MouseListener() {
+			int mousei=getSize().x/matrix.getCols();
+			int mousej=getSize().y/matrix.getRows();
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				if(character.y==mousei && character.x==mousej)
+				{
+					
+					mousei=arg0.x/(getSize().x/matrix.getRows());
+					mousej=arg0.y/(getSize().y/matrix.getCols());
+					character.y=mousei;
+					character.x=mousej;
+					redraw();
+					forceFocus();
+				}
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				
+				
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+	
+		
+
+
+		
+	
 		
 
 		
@@ -151,11 +177,7 @@ public class MyBoard extends AbstractBoard{
 	
 	
 	
-	
-		
-		
-		
-		
+
 	}
 
 

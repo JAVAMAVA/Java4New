@@ -69,26 +69,7 @@ public class MazeWindow extends BasicWindow implements View{
 			}
 		});
 		
-		gameBoard.addMouseListener(new MouseListener() {
-			GameCharacter myChar = null;
-			
-			@Override
-			public void mouseUp(MouseEvent arg0) {
-				if(myChar == null)
-					return;
-//				TODO move character
-				myChar = null;
-			}
-			
-			@Override
-			public void mouseDown(MouseEvent arg0) {
-//				if((arg0.x/(gameBoard.getSize().x/md.getCols())) == gameBoard.getCharacter().x && )
-//				check if there is a click on a Cell the character is in.
-			}
-			
-			@Override
-			public void mouseDoubleClick(MouseEvent arg0) {	}
-		});
+		
 		
 		//gameBoard.redraw();
 		//md=new MyMazeDisplayer(gameBoard, m);
@@ -263,9 +244,8 @@ public class MazeWindow extends BasicWindow implements View{
 		int x=gameBoard.character.x;
 		int y=gameBoard.character.y;
 		State temp;
-		SolutionCharacter mgc=new SolutionCharacter(new Image(gameBoard.getDisplay(), "ImagesCharacters\\Dragon\\DragonF.png"), x, y);
+		
 		gameBoard.sol=s;
-		gameBoard.solcaracter=mgc;
 		gameBoard.solve=true;
 		gameBoard.redraw();
 		

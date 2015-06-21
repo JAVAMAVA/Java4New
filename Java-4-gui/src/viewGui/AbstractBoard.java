@@ -1,5 +1,7 @@
 package viewGui;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -12,6 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import algorithms.mazeGenerators.DFSMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import algorithms.search.State;
 
 
 public abstract class AbstractBoard extends Composite implements Board{
@@ -21,7 +24,6 @@ public abstract class AbstractBoard extends Composite implements Board{
 	Maze matrix;
 	AbstractMazeDispleyer myMaze;
 	boolean newmaze=false;
-	SolutionCharacter solcaracter;
 	Boolean solve=false;
 	Solution sol;
 	
@@ -36,7 +38,7 @@ public abstract class AbstractBoard extends Composite implements Board{
 			@Override
 			public void paintControl(PaintEvent e) {
 					if(solve==true)
-						solcaracter.paint(e.gc, getSize().y/matrix.getCols(), getSize().x/matrix.getRows(), sol);
+						drawSolution(e);
 					if (boardGame==null || newmaze==true)
 						drawMaze(e);
 					else myMaze.draw(e);
@@ -63,6 +65,33 @@ public abstract class AbstractBoard extends Composite implements Board{
 		boardGame[character.getXCharater()][character.getYCharater()].redraw();
 		
 	}*/
+	protected void drawSolution(PaintEvent e) {
+		ArrayList<State> temp=this.sol.getSolution();
+		String[] strings;
+		State temps;
+		String stringtemp;
+		for(int i=temp.size()-1;i>=0;i--)
+		{
+			temps=temp.get(i);
+			strings=temps.getState().split("[(,)]");
+			stringtemp="";
+			if(matrix.getCell(character.getXCharater(), character.getYCharater()).getUp()==true)
+				stringtemp+="U";
+			if(matrix.getCell(character.getXCharater(), character.getYCharater()).getRight()==true)
+				stringtemp+="R";
+			if(matrix.getCell(character.getXCharater(), character.getYCharater()).getDown()==true)
+				stringtemp+="D";
+			if(matrix.getCell(character.getXCharater(), character.getYCharater()).getLeft()==true)
+				stringtemp+="L";
+			int x=Integer.parseInt(strings[1]);
+			int y=Integer.parseInt(strings[2]);
+			Image myimage=new Image(this.getDisplay(), "Images//FloorImageSolution//"+temp+".jpg");
+			boardGame[x][y].setcImage(myimage);
+			
+		}
+		this.redraw();
+		
+	}
 	public void AddImages()
 	{
 		
