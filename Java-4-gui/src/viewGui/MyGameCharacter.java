@@ -10,6 +10,8 @@ public class MyGameCharacter implements GameCharacter {
 
 	int x,y;
 	Image chImage;
+	boolean ifMoved;
+	String direction;
 	
 	
 	public MyGameCharacter(Image img,int x,int y) {
@@ -19,8 +21,9 @@ public class MyGameCharacter implements GameCharacter {
 	public void paint(GC gc,int w,int h){
 		
 		
-		  gc.drawImage(chImage, 0, 0,20 ,25,w*(this.y)+6,w*(this.x)+10, w-15, h-18);
+		  gc.drawImage(chImage, 0, 0,20 ,25,w*(this.y)+6,h*(this.x)+10, w-15, h-18);
 		
+		//else gc.drawImage(chImage, 0, 0,20 ,25,w*(this.y)+6,w*(this.x)+10, w-15, h-18);
 		//else gc.drawImage(chImage, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight);
 		   //gc.setForeground(new Color(null,255,0,0));
 		   //gc.drawOval(x,y, w, h);
@@ -61,6 +64,14 @@ public class MyGameCharacter implements GameCharacter {
 	public Image getCimage()
 	{
 		return this.chImage;
+	}
+	public void setMoved(boolean moved)
+	{
+		this.ifMoved=moved;
+	}
+	public boolean setMoved()
+	{
+		return this.ifMoved;
 	}
 	}
 

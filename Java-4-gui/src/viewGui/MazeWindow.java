@@ -9,7 +9,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -17,7 +19,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.Listener;
 
 import presenter.Presenter;
 import presenter.Presenter.Command;
@@ -45,11 +49,48 @@ public class MazeWindow extends BasicWindow implements View{
 	
 	@Override
 	void initWidgets() {
+		
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
 		Maze m=new Maze(10, 10);
 		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
 		gameBoard.layout();
+		
+		gameBoard.addListener(SWT.RESIZE, new Listener() {
+			
+			@Override
+			public void handleEvent(Event arg0) {
+				gameBoard.drawBoard();
+			}
+		});
+		
+		gameBoard.addMouseListener(new MouseListener() {
+			
+			GameCharacter myChar = null;
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				
+				if(myChar == null)
+					return;
+				
+//				TODO move character
+				
+				myChar = null;
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				
+//				if((arg0.x/(gameBoard.getSize().x/md.getCols())) == gameBoard.getCharacter().x && )
+//				check if there is a click on a Cell the character is in.
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {	}
+		});
+		
 		//gameBoard.redraw();
 		//md=new MyMazeDisplayer(gameBoard, m);
 		
@@ -57,6 +98,7 @@ public class MazeWindow extends BasicWindow implements View{
 		boardLayout.horizontalSpacing = 0;
 		boardLayout.verticalSpacing = 0;
 		gameBoard.setLayout(boardLayout);
+		gameBoard.layout();
 		
 		
 		//gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));

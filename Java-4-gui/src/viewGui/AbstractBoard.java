@@ -18,6 +18,7 @@ public abstract class AbstractBoard extends Composite implements Board{
 	public MazeCanvas boardGame[][];
 	MyGameCharacter character;
 	Maze matrix;
+	AbstractMazeDispleyer myMaze;
 	
 	public AbstractBoard(Composite parent, int style,Maze m) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
@@ -29,14 +30,32 @@ public abstract class AbstractBoard extends Composite implements Board{
 			
 			@Override
 			public void paintControl(PaintEvent e) {
-				
-					drawMaze(e);
+					if (boardGame==null)
+						drawMaze(e);
+					else myMaze.draw(e);
 			}
 		});
 		
 		
 		
-	}
+	}/*
+	public void drawCharacterMove(PaintEvent e) {
+		String temp="";
+		if(matrix.getCell(character.getXCharater(), character.getYCharater()).getUp()==true)
+			temp+="U";
+		if(matrix.getCell(character.getXCharater(), character.getYCharater()).getRight()==true)
+			temp+="R";
+		if(matrix.getCell(character.getXCharater(), character.getYCharater()).getDown()==true)
+			temp+="D";
+		if(matrix.getCell(character.getXCharater(), character.getYCharater()).getLeft()==true)
+			temp+="L";
+		boardGame[character.getXCharater()][character.getYCharater()].drawCell(e, (getSize().x/matrix.getCols())*character.getXCharater() , (getSize().y/matrix.getRows())*character.getXCharater() , (getSize().x/matrix.getCols()), (getSize().y/matrix.getRows()));
+		boardGame[character.getXCharater()][character.getYCharater()].setcImage(new Image(this.getDisplay(), "Images//FloorImages//floor"+temp+".jpg"));
+		boardGame[character.getXCharater()][character.getYCharater()].setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true,character.getXCharater(),character.getYCharater()));
+		boardGame[character.getXCharater()][character.getYCharater()].drawCell(e, (getSize().x/matrix.getCols())*character.getXCharater() , (getSize().y/matrix.getRows())*character.getXCharater() , (getSize().x/matrix.getCols()), (getSize().y/matrix.getRows()));
+		boardGame[character.getXCharater()][character.getYCharater()].redraw();
+		
+	}*/
 	public void AddImages()
 	{
 		

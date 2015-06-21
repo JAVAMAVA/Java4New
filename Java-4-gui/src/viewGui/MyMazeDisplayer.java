@@ -38,14 +38,15 @@ public class MyMazeDisplayer extends AbstractMazeDispleyer  {
 	 * @param matrix - the {@link Maze} that need to draw in the board
 	 */
 	@Override
-	public void draw()
+	public void draw(PaintEvent e)
 	{
 			 
 			if (this.board.boardGame!=null)
 				for(int i=0;i<this.m.getRows();i++)
 				{
 					for(int j=0;j<this.m.getCols();j++)
-						board.boardGame[i][j].redraw();
+						
+						board.boardGame[i][j].drawCell(e, (board.getSize().x/board.matrix.getCols())*j , (board.getSize().y/board.matrix.getRows())*i , (board.getSize().x/board.matrix.getCols()), (board.getSize().y/board.matrix.getRows()));
 				}
 			
 

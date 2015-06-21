@@ -14,7 +14,7 @@ import algorithms.search.Solution;
  */
 
 public interface MazeDispleyer {
-	void draw();
+	void draw(PaintEvent e);
 	int getRows();
 	int getCols();
 }

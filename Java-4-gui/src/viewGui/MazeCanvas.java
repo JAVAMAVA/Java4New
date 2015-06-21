@@ -1,10 +1,10 @@
 package viewGui;
 
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.PaintEvent;
-
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Canvas;
@@ -24,7 +24,7 @@ public class MazeCanvas extends Canvas {
 	private Image CellImage;
 	
 	public MazeCanvas(Composite parent, int style) {
-		super(parent, style);
+		super(parent, style | SWT.DOUBLE_BUFFERED);
 	}
 		
 		public void setcImage(Image cImage) {

@@ -19,8 +19,8 @@ import algorithms.mazeGenerators.Maze;
 
 public class MyBoard extends AbstractBoard{
 	
-	AbstractMazeDispleyer myMaze;
-	String state="(0,0)";
+	
+
 	
 	
 	public MyBoard(Composite parent, int style,Display display,Shell shell,Maze m) {
@@ -52,8 +52,8 @@ public class MyBoard extends AbstractBoard{
 				 if (arg0.keyCode == SWT.ARROW_UP){
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getUp()==false)
 					 {
-						
-						//boardGame[character.getXCharater()][character.getYCharater()].redraw();
+						character.setMoved(true);
+						boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						character.setXCharater(character.getXCharater()-1);
 						
 						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
@@ -65,40 +65,59 @@ public class MyBoard extends AbstractBoard{
 					 //gamechar.paint
 					
 						redraw();
+						if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
+						{
+							System.out.println("THE END");
+						}
 					 
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_DOWN){
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getDown()==false)
 					 {
+						 ///character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						 character.setXCharater(character.getXCharater()+1);
 						
 							//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
 						 
 						 redraw();
+						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
+							{
+								System.out.println("THE END");
+							}
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_LEFT){
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getLeft()==false)
 					 {
+						 //character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
-						 character.setYCharater(character.getYCharater()-1);
+						character.setYCharater(character.getYCharater()-1);
 						 
 						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
 						 
 						 redraw();
+						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
+							{
+								System.out.println("THE END");
+							}
 					 }
 				 }
 				 if (arg0.keyCode == SWT.ARROW_RIGHT){
 					 if (matrix.getCell(character.getXCharater(),character.getYCharater()).getRight()==false)
 					 {
+						 //character.setMoved(true);
 						 //boardGame[character.getXCharater()][character.getYCharater()].redraw();
 						 character.setYCharater(character.getYCharater()+1);
 						
 						//character.paint(gc,getSize().x/matrix.getRows(), getSize().y/matrix.getCols());
 						 
 						 redraw();
+						 if (character.getXCharater()==matrix.getRows()-1 && character.getYCharater()==matrix.getCols()-1)
+							{
+								System.out.println("THE END");
+							}
 					 }
 				 }
 				
