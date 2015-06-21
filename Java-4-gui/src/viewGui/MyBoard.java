@@ -1,12 +1,16 @@
 package viewGui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import algorithms.mazeGenerators.Maze;
 
 
 
@@ -15,23 +19,57 @@ public class MyBoard extends AbstractBoard{
 	AbstractMazeDispleyer myMaze;
 	
 	
-	public MyBoard(Composite parent, int style,Display display,Shell shell) {
-		super(parent, style | SWT.DOUBLE_BUFFERED);
+	public MyBoard(Composite parent, int style,Display display,Shell shell,Maze m) {
+		super(parent, style | SWT.DOUBLE_BUFFERED,m);
 		
-		myMaze = new MyMazeDisplayer(this, style, display, shell);
+		myMaze = new MyMazeDisplayer(this, this.matrix);
 		
 		addPaintListener(new PaintListener() {
 			
 			@Override
 			public void paintControl(PaintEvent arg0) { //moving the character
-				myMaze.display(arg0); //send to him arg0
+				myMaze.draw(); //send to him arg0
 				//set char
 				//mymaze.redraw
 				// ....
 				
 			}
+	
 		});
-		
+		addKeyListener(new KeyListener() { //listening to the client key arrows
+			
+
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				
+				 if (arg0.keyCode == SWT.ARROW_UP){
+					 //move up
+					 //list todo:
+					 //moving the index of the character
+					 //canvas[][].redraw ->redraws to old thing(if problem, do redraw whole maze)
+					 //gamechar.paint
+					 
+					 
+				 }
+				 if (arg0.keyCode == SWT.ARROW_DOWN){
+					 //move down
+				 }
+				 if (arg0.keyCode == SWT.ARROW_LEFT){
+					 //move left
+				 }
+				 if (arg0.keyCode == SWT.ARROW_RIGHT){
+					 //move right
+				 }
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				
+			}
+		});
 		
 	 
 	

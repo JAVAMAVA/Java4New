@@ -80,8 +80,7 @@ public class MyView extends Observable implements View {
 	 */
 	@Override
 	public void displayMaze(Maze m) {
-		MazeDispleyer MD=new AbstractMazeDispleyer();
-		MD.display(m);
+		m.print();
 		
 	}
 	/**
@@ -107,6 +106,10 @@ public class MyView extends Observable implements View {
 	public void setLastCommand(Command comm) {
 		this.lastcommand=comm;
 		
+	}
+	public HashMap<String, Command> getHM()
+	{
+		return this.comm;
 	}
 
 

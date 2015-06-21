@@ -7,7 +7,10 @@ package viewGui;
  */
 public abstract class AbstractMazeDispleyer implements MazeDispleyer{
 	
-	//add canvas[][]
+	AbstractBoard board;
+	public void setBoard(AbstractBoard board) {
+		this.board = board;
+	}
 	
 	
 

@@ -3,7 +3,6 @@ package viewGui;
 
 import java.util.HashMap;
 import java.util.Observer;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -14,8 +13,8 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
-
 import presenter.Presenter;
 import presenter.Presenter.Command;
 import view.View;
@@ -28,11 +27,14 @@ public class MazeWindow extends BasicWindow implements View{
 	MyBoard gameBoard;
 	public Command lastcommand;
 	private HashMap<String, Command> comm;
+	public Maze myMaze;
+	public MazeDispleyer md;
+	
 	
 	public MazeWindow(String title,int width , int height) {
 		super(title, width, height);
-	
-		// TODO Auto-generated constructor stub
+		
+		
 	}
 	
 	
@@ -41,44 +43,21 @@ public class MazeWindow extends BasicWindow implements View{
 	void initWidgets() {
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
+		Maze m=new Maze(10, 10);
+		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
+		//md=new MyMazeDisplayer(gameBoard, m);
 		
-		gameBoard.addKeyListener(new KeyListener() { //listening to the client key arrows
-			
-
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				
-				 if (arg0.keyCode == SWT.ARROW_UP){
-					 //move up
-					 //list todo:
-					 //moving the index of the character
-					 //canvas[][].redraw ->redraws to old thing(if problem, do redraw whole maze)
-					 //gamechar.paint
-					 
-					 
-				 }
-				 if (arg0.keyCode == SWT.ARROW_DOWN){
-					 //move down
-				 }
-				 if (arg0.keyCode == SWT.ARROW_LEFT){
-					 //move left
-				 }
-				 if (arg0.keyCode == SWT.ARROW_RIGHT){
-					 //move right
-				 }
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				
-				
-			}
-		});
+		GridLayout boardLayout = new GridLayout(m.getCols(), true);
+		boardLayout.horizontalSpacing = 0;
+		boardLayout.verticalSpacing = 0;
+		gameBoard.setLayout(boardLayout);
+		
+		
+		//gameBoard.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true,2,1));
+		
 		
 		Button createMaze=new Button(shell,SWT.PUSH);
-		gameBoard=new MyBoard(shell, SWT.CENTER,this.display,this.shell);
+		
 		Button startGame=new Button(shell, SWT.PUSH);
 		Button exitGame=new Button(shell, SWT.PUSH);
 		Button clue=new Button(shell, SWT.PUSH);
@@ -86,7 +65,7 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		
 		createMaze.setText("Create new Maze");
-		createMaze.setLayoutData(new GridData(SWT.CENTER, SWT.TOP,false,false,1,1));
+		
 		createMaze.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -193,9 +172,14 @@ public class MazeWindow extends BasicWindow implements View{
 		
 	}
 	
+
+	public void setGameBoard(MyBoard gameboard){
+		this.gameBoard = gameboard;
+	}
 	
-
-
+	public void setDisplayer(MazeDispleyer md){
+		this.md = md;
+	}
 
 	@Override
 	public Command getUserCommand() {

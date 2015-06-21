@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import presenter.Presenter.Command;
+
 /**
  * {@link MyCLI} extends {@link CLI} and implements {@link Runnable} 
  *  it is the main part behind the view commands
@@ -21,14 +23,15 @@ public class MyCLI extends CLI implements Runnable  {
 	View v;
 	public MyCLI(BufferedReader in, PrintWriter out,View v) {
 		super(in, out);
-		hm=new HashMap<>();
 		this.v=v;
+		
 
 	}
 	
 	@Override 
 	public void start()
 	{
+		this.hm=v.getHM();
 		try {
 		System.out.println("Enter a command");
 		String Line=in.readLine();
@@ -50,7 +53,9 @@ public class MyCLI extends CLI implements Runnable  {
 						v.setLastCommand(hm.get(commandName));
 						v.notifyArg(sp[2]);
 					}
-						
+					System.out.println("Enter a command");
+					Line=in.readLine();
+					
 			}
 					
 		} catch (IOException e) {
