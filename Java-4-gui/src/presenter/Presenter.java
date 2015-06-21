@@ -27,6 +27,7 @@ public class Presenter implements Observer {
 	public Presenter(View v,Model m) {
 		this.v=v;
 		this.m=m;
+		this.setCommands();
 		
 	}
 	public void setCommands()
@@ -47,16 +48,21 @@ public class Presenter implements Observer {
 			//if the view notified the presenter
 		   if(o == v) {
 			   if((String)args=="start")
+			   {
 				   v.setCommands(comm);
-			   if((String)args=="exit")
+			   	v.displaySuccess("done");
+			   }
+			   else if((String)args=="exit")
 			   {
 					Command newComm=new ExitCommand();
 					newComm.doCommand((String)args);
 			   }
 			   else 
 			   {
+				   
 				   Command newComm=v.getUserCommand();
 				   newComm.doCommand((String)args);
+				   v.displaySuccess("done");
 			   }
 		   }
 		   
@@ -78,6 +84,7 @@ public class Presenter implements Observer {
 				   break;
 			   case "Maze generated":
 				   v.displaySuccess((String)args);
+				   v.displayMaze(m.getMaze());
 				   break;
 			   case "Maze already exists":
 				   v.displaySuccess((String)args);
@@ -99,7 +106,7 @@ public class Presenter implements Observer {
 		public void doCommand(String arg) {
 			String[] commands=arg.split(" ");
 			//check input
-			m.generateMaze(commands[0],Integer.parseInt(commands[1]),Integer.parseInt(commands[2]));
+			m.generateMaze(commands[0],/*Integer.parseInt(commands[1]),Integer.parseInt(commands[2])*/10,10);
 			v.displaySuccess("maze"+commands[0]+" is ready");
 		}
 
