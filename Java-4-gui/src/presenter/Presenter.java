@@ -106,7 +106,7 @@ public class Presenter implements Observer {
 		public void doCommand(String arg) {
 			String[] commands=arg.split(" ");
 			//check input
-			m.generateMaze(commands[0],/*Integer.parseInt(commands[1]),Integer.parseInt(commands[2])*/20,20);
+			m.generateMaze(commands[0],Integer.parseInt(commands[1]),Integer.parseInt(commands[2]));
 			v.displaySuccess("maze"+commands[0]+" is ready");
 		}
 

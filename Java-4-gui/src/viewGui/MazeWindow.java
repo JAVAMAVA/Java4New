@@ -1,31 +1,26 @@
 package viewGui;
 
 
-import java.lang.ProcessBuilder.Redirect;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observer;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
+
 import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.events.PaintEvent;
+
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
+
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Composite;
+
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Layout;
+
 import org.eclipse.swt.widgets.Listener;
 
-import presenter.Presenter;
 import presenter.Presenter.Command;
 import view.View;
 import algorithms.mazeGenerators.Maze;
@@ -40,11 +35,13 @@ public class MazeWindow extends BasicWindow implements View{
 	private HashMap<String, Command> comm;
 	public Maze myMaze;
 	public MazeDispleyer md;
+	public String name;
 	
 	
-	public MazeWindow(String title,int width , int height) {
-		super(title, width, height);
-		
+	public MazeWindow(String title,int width , int height,Display dis, int i, int j, String name) {
+		super(title, width, height,dis) ;
+		myMaze=new Maze(i, j);
+		this.name=name;
 		
 		
 	}
@@ -58,8 +55,8 @@ public class MazeWindow extends BasicWindow implements View{
 		
 		shell.setLayout(new GridLayout(2, false)); //just started, needs changing
 		
-		Maze m=new Maze(20,20);
-		gameBoard=new MyBoard(shell,SWT.None, display, shell, m);
+		
+		gameBoard=new MyBoard(shell,SWT.None, display, shell, myMaze);
 		gameBoard.layout();
 		
 		gameBoard.addListener(SWT.RESIZE, new Listener() {
@@ -74,7 +71,7 @@ public class MazeWindow extends BasicWindow implements View{
 		//gameBoard.redraw();
 		//md=new MyMazeDisplayer(gameBoard, m);
 		
-		GridLayout boardLayout = new GridLayout(m.getCols(), true);
+		GridLayout boardLayout = new GridLayout(myMaze.getCols(), true);
 		boardLayout.horizontalSpacing = 0;
 		boardLayout.verticalSpacing = 0;
 		gameBoard.setLayout(boardLayout);
@@ -105,6 +102,8 @@ public class MazeWindow extends BasicWindow implements View{
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
+			  
+				
 				
 			}
 			
@@ -144,7 +143,7 @@ public class MazeWindow extends BasicWindow implements View{
 				
 			}
 		});
-		clue.setText("Get a Clue");
+		clue.setText("Get the Solution!");
 		clue.setLayoutData(new GridData(SWT.FILL, SWT.NONE,false,false,1,1));
 		
 		
@@ -154,11 +153,11 @@ public class MazeWindow extends BasicWindow implements View{
 			public void widgetSelected(SelectionEvent arg0) {
 				lastcommand=comm.get("solve maze");
 				setChanged();
-				notifyObservers("amit");
+				notifyObservers(name);
 				gameBoard.forceFocus();
 				lastcommand=comm.get("display solution");
 				setChanged();
-				notifyObservers("amit");
+				notifyObservers(name);
 				
 			}
 			
@@ -210,10 +209,11 @@ public class MazeWindow extends BasicWindow implements View{
 
 	protected void generatemaze() {
 		
-		gameBoard.matrix.print();
+		setChanged();
+		notifyObservers("start");
 		lastcommand=comm.get("generate maze");
 		setChanged();
-		notifyObservers("amit");
+		notifyObservers(name+" "+myMaze.getRows()+" "+myMaze.getCols());
 		gameBoard.matrix.print();
 		
 	}
@@ -244,7 +244,7 @@ public class MazeWindow extends BasicWindow implements View{
 		int x=gameBoard.character.x;
 		int y=gameBoard.character.y;
 		State temp;
-		
+		s.printSolution();
 		gameBoard.sol=s;
 		gameBoard.solve=true;
 		gameBoard.redraw();
@@ -290,6 +290,12 @@ public class MazeWindow extends BasicWindow implements View{
 	public HashMap<String, Command> getHM() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	void closeWindow() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
